@@ -1,0 +1,38 @@
+<ion-view view-title="{{chat.friendName}}" hide-tabs="true">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" has-footer="true" overflow-scroll="false" class="has-header has-footer" delegate-handle="myChatDetailList">
+        <div class="list">
+            <div collection-repeat="chatDetail in myChat.chatList">
+                <div class="item item-divider" style="text-align: center;">
+                    <span ng-bind="chatDetail.date"></span>
+                </div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col col-20" ng-show="chatDetail.showLeft">
+                            <img style="width:100%;border-radius:50%;" ng-src="{{chatDetail.avatar}}">
+                        </div>
+                        <div class="col col-20" ng-show="chatDetail.showRight"></div>
+                        <div class="col col-60 ol-center item-text-wrap">
+                            <span ng-bind="chatDetail.content"></span>
+                        </div>
+                        <div class="col col-20" ng-show="chatDetail.showRight">
+                            <img style="width:100%;border-radius:50%;" ng-src="{{chatDetail.avatar}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </ion-content>
+    <div class="bar bar-footer bar-positive item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-compose placeholder-icon"></i>
+            <input type="text" placeholder="请输入你要输入的内容" ng-model="mysay.data">
+        </label>
+<!--        当输入文字时，才会变为现在的发送按钮，由语音按钮，图片按钮，视频按钮，文本按钮-->
+        <button class="button button-clear icon ion-reply" ng-click="sendMsg()">
+        </button>
+    </div>
+</ion-view>

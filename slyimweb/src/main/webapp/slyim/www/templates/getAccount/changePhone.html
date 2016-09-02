@@ -1,0 +1,64 @@
+<ion-view view-title="更换账号">
+    <ion-nav-buttons side="left">
+        <div class="button-bar">
+            <a href="#getPhone"><button class="button">返回取出账号</button></a>
+        </div>
+    </ion-nav-buttons>
+    <ion-content has-header="true" overflow-scroll="false" class="has-header">
+        <div class="row" style="height:50px"></div>
+        <div class="row">
+            <div class="col col-33 col-offset-33">
+                <img style="width:100%;max-width:180px;min-width:50px;" src="myico/anlianico180.png">
+            </div>  
+        </div>
+        <div class="list">
+            <div class="item item-input item-stacked-label">
+                <span class="input-label">您的<span style="color:red;">旧</span>手机号码</span>
+                <div class="row">
+                    <div class="col">
+                        <p style="color:#D26900;" ng-show="getoldphone.errorphone"><span ng-bind="getoldphone.errormsg"></span></p>
+                        <input type="text" placeholder="请填写您的手机号" ng-model="getoldphone.phonenum" ng-change="getoldphone.checkPhone()" ng-disabled="getoldphone.opencode">
+                    </div>
+                </div>
+            </div>         
+            <div class="item item-input item-stacked-label" ng-show="getoldphone.showcode">
+                <span class="input-label">您<span style="color:red;">旧手机</span>收到的短信</span>
+                <div class="row">
+                    <div class="col col-66">
+                        <p style="color:#D26900;" ng-show="getoldphone.errorcode"><span ng-bind="getoldphone.errorcodemsg"></span></p>
+                        <input type="text" placeholder="请填写刚刚收到的6位验证码" ng-model="getoldphone.codenum" ng-change="getoldphone.checkCode()" ng-disabled="getoldphone.opencode">
+                    </div>
+                    <div class="col col-33">
+                        <button class="button button-small button-positive" ng-click="getoldphone.sendCode()" style="width:85px;" ng-disabled="getoldphone.isSend">
+                            <span ng-bind="getoldphone.checkCodeTime"></span>
+                        </button>   
+                    </div>                       
+                </div>
+            </div>
+            <div class="item item-input item-stacked-label"  ng-show="getnewphone.showall">
+                <span class="input-label">您的<span style="color:#D26900;">新</span>手机号码</span>
+                <div class="row">
+                    <div class="col">
+                        <p style="color:#D26900;" ng-show="getnewphone.errorphone"><span ng-bind="getnewphone.errormsg"></span></p>
+                        <input type="text" placeholder="请填写您的手机号" ng-model="getnewphone.phonenum" ng-change="getnewphone.checkPhone()" ng-disabled="getnewphone.opencode">
+                    </div>
+                </div>
+            </div>         
+            <div class="item item-input item-stacked-label" ng-show="getnewphone.showcode">
+                <span class="input-label">您<span style="color:#D26900;">新手机</span>收到的短信</span>
+                <div class="row">
+                    <div class="col col-66">
+                        <p style="color:#D26900;" ng-show="getnewphone.errorcode"><span ng-bind="getnewphone.errorcodemsg"></span></p>
+                        <input type="text" placeholder="请填写刚刚收到的6位验证码" ng-model="getnewphone.codenum" ng-change="getnewphone.checkCode()" ng-disabled="getnewphone.opencode">
+                    </div>
+                    <div class="col col-33">
+                        <button class="button button-small button-positive" ng-click="getnewphone.sendCode()" style="width:85px;" ng-disabled="getnewphone.isSend">
+                            <span ng-bind="getnewphone.checkCodeTime"></span>
+                        </button>   
+                    </div>                       
+                </div>
+            </div>
+            
+        </div>
+    </ion-content>
+</ion-view>

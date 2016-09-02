@@ -1,0 +1,59 @@
+<ion-view view-title="通讯录">
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content has-tabs="true" has-header="true" overflow-scroll="false" class="has-tabs has-header">
+         <ion-list>
+             <ion-item class="item item-icon-left">
+                 <a href="findFriend.html" style="text-decoration: none;">
+                <i class="icon ion-person-add balanced"></i>
+                     <span style="color:black;">添加好友</span>
+                 </a>
+                 <span class="badge badge-assertive" ng-show="actionList.addFriendBageShow"><span ng-bind="actionList.addFriendBageNum"></span></span>
+             </ion-item>
+             <ion-item class="item item-icon-left">
+                <i class="icon ion-chatboxes royal"></i>
+                 添加讨论盒子
+             </ion-item>
+             <ion-item class="item item-icon-left">
+                <i class="icon ion-android-calendar assertive"></i>
+                 我的活动
+             </ion-item>
+<!--
+             <ion-item class="item item-icon-left">
+                <i class="icon ion-person positive"></i>
+                 切换为个人视图
+             </ion-item>
+-->
+             <ion-item class="item item-icon-left">
+                <i class="icon ion-person-stalker positive"></i>
+                 切换为盒子视图
+             </ion-item>
+        </ion-list>
+
+        <ion-list >
+            <div  ng-repeat="addressTitle in myAddress.addressTitleArray">
+                <ion-item class="item item-divider" id="addressDivider{{addressTitle}}" ng-click="openGoToTitle()">
+                    <span ng-bind="addressTitle"></span>
+                 </ion-item>
+                <ion-item class="item item-avatar" type="item-text-wrap" href="#/tab/chatdetail/{{friend.friendId}}" ng-repeat="friend in myAddress.addressTitle[addressTitle]">
+                     <img ng-src="{{friend.friendAvatar}}">
+                     <h2><span ng-bind="friend.friendName"></span></h2>
+                     <p><span ng-bind="friend.friendSign"></span></p>
+                     <ion-option-button class="button-balanced">
+                      租他/她
+                    </ion-option-button>
+                    <ion-option-button class="button-energized">
+                      删除好友
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive">
+                      加入黑名单
+                    </ion-option-button>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

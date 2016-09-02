@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation=
+	"
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/data/mongo       
+    http://www.springframework.org/schema/data/mongo/spring-mongo.xsd 
+	">
+	<!-- 引用配置文件路径，ignore-unresolvable解决spring只读一个配置的问题 -->
+	<context:property-placeholder location="classpath:spring/mongodb.properties" ignore-unresolvable="true"/>
+	
+	
+	
+	<!-- mongo的工厂，通过它来取得mongo实例，dbname为Mongodb的数据库名称，没有会自动创建 -->
+	<!-- <mongo:db-factory dbname="${mongo.databasename}" mongo-ref="mongo" />  -->
+	<!-- 下面是新方法,上面的方法被标记过时，已经不建议使用 -->
+	<mongo:mongo-client 
+	host="${mongo.host}" 
+	port="${mongo.port}"
+	credentials="${mongo.username}:${mongo.password}@admin"
+	 >
+	 <!-- credentials="${mongo.username}:${mongo.password}@admin" -->
+	 <mongo:client-options write-concern="NORMAL" />
+  	</mongo:mongo-client>
+  	
+	<mongo:db-factory 
+	dbname="${mongo.databasename}" 
+	mongo-ref="mongo" 
+	/>
+	<!-- mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成 -->
+	<!-- constructor-argshi是通过构造函数注入，property是通过set／get方法注入 -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
+	
+	<!-- 引用实现类,已使用@Repository实现 -->
+    <!-- <bean id="userDaoMongo" class="com.slyim.dao.impl.UserDaoMongo" /> -->
+</beans>

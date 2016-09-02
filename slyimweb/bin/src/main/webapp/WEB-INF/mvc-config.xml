@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 扫描引入拦截器包,控制器包 -->
+	<context:component-scan base-package="com.slyim.controller"/>
+	<!-- 自动注解 -->
+    <mvc:annotation-driven />
+    <!-- 自动静态文件使用 -->
+    <mvc:resources mapping="/js/**" location="/js/"/>  
+    <mvc:resources mapping="/css/**" location="/css/"/>  
+    <mvc:resources mapping="/img/**" location="/img/"/>  
+    <mvc:default-servlet-handler />
+	<!-- 设置视图目录 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	        <property name="prefix" value="/WEB-INF/view/"/>
+	        <property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 设置mvc拦截器 -->
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/char/**"/> <!-- 拦截的url -->
+            <!-- <mvc:exclude-mapping path="/user/login"/> --> <!-- 不拦截的url -->
+                <bean id="ChatInterceptor" class="com.slyim.interceptor.ChatInterceptor"/>
+        </mvc:interceptor> 
+    </mvc:interceptors>
+</beans>

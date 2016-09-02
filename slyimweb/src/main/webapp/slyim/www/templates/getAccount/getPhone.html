@@ -1,0 +1,41 @@
+<ion-view view-title="取回账号">
+    <ion-nav-buttons side="right">
+        <div class="button-bar">
+            <a href="#changePhone"><button class="button">更换了号码？</button></a>
+        </div>
+    </ion-nav-buttons>
+    <ion-content has-header="true" overflow-scroll="false" class="has-header">
+        <div class="row" style="height:50px"></div>
+        <div class="row">
+            <div class="col col-33 col-offset-33">
+                <img style="width:100%;max-width:180px;min-width:50px;" src="myico/anlianico180.png">
+            </div>  
+        </div>
+        <div class="list">
+            <div class="item item-input item-stacked-label">
+                <span class="input-label">您的手机号码</span>
+                <div class="row">
+                    <div class="col">
+                        <p style="color:#D26900;" ng-show="notphone">您输入的手机号码应为大陆11位号码</p>
+                        <input type="text" placeholder="请填写您的手机号" ng-model="getphone.phonenum" ng-change="checkPhone()">
+                    </div>
+                </div>
+            </div>         
+            <div class="item item-input item-stacked-label">
+                <span class="input-label">您收到的短信</span>
+                <div class="row">
+                    <div class="col col-66">
+                        <p style="color:#D26900;" ng-show="notcode">验证码为6位数字</p>
+                        <p style="color:red;" ng-show="errorcode">验证码输入错误，请核对后再输</p>
+                        <input type="text" placeholder="请填写6位验证码" ng-model="getphone.codenum" ng-change="checkCode()" ng-disabled="isopencode">
+                    </div>
+                    <div class="col col-33">
+                        <button class="button button-small button-positive" ng-click="sendCode()" style="width:85px;" ng-disabled="isSend">
+                            <span ng-bind="checkCodeTime"></span>
+                        </button>   
+                    </div>                       
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

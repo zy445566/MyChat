@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=
+	"
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	">
+	<!-- 引用配置文件路径，ignore-unresolvable解决spring只读一个配置的问题 -->
+	<context:property-placeholder location="classpath:spring/redis.properties" ignore-unresolvable="true"/>
+	<!-- 配置文件实现 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <property name="maxIdle" value="${redis.maxIdle}" /> 
+        <property name="minIdle" value="${redis.minIdle}" /> 
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+    </bean>
+	<!-- 工厂方法实现 -->
+	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">  
+    	<property name="hostName"   value="${redis.hostName}" />
+    	<property name="port"   value="${redis.port}" />
+    	<property name="password"   value="${redis.password}" />
+    	<property name="timeout"   value="${redis.timeout}" />
+    	<property name="poolConfig"   ref="poolConfig" />
+    </bean>
+    <!-- 连接模版实现，实现ioc容器 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory"   ref="connectionFactory" />  
+    </bean>     
+     <!-- 引用实现类,已使用@Repository实现 -->
+    <!-- <bean id="userDaoRedis" class="com.slyim.dao.impl.UserDaoRedis" /> -->
+    
+</beans>

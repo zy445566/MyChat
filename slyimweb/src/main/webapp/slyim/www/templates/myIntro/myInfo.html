@@ -1,0 +1,83 @@
+<ion-view view-title="设置帐号">
+    <ion-nav-buttons side="right">
+        <div class="button-bar">
+            <a href="myChat.html"><button class="button">返回聊天</button></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:;"><button class="button" ng-disabled="isdisabled" ng-click="upUserInfo()">保存</button></a>
+        </div>
+    </ion-nav-buttons>
+     <ion-content has-header="true" overflow-scroll="false" class="has-header">
+            <div class="row" style="height:50px"></div>       
+            <div class="row">   
+                <div class="col col-33 col-offset-33">
+                    <img style="width:100%;border-radius:50%;width:100px;height:100px;border:1px solid #DDDDDD;" ng-src="{{myicon}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-33 col-offset-33">
+<!--                    <span ><i class="icon ion-camera" style="font-size:36px;"></i></span>-->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span ng-click="takePic()"><i class="icon ion-image" style="font-size:36px;"></i></span>
+                    <file_up_data  ng-disabled="isdisabled"></file_up_data>
+                </div>  
+            </div>
+         <div class="row" ng-show="info.unlockShow">
+                <div class="{{info.unlockCol}}">
+                    <h3 class="{{info.unlockIco}}"><span ng-bind="info.unlockText"></span></h3>
+                </div>  
+            </div>
+            <div class="list">
+                <div class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        签名(可选)<span ng-bind="info.signShow"></span>
+                    </span>
+                    <p style="color:red;" ng-show="errorsign"><span ng-bind="info.signMsg"></span></p>
+                    <input type="text" placeholder="说出自己想说的话" ng-model="info.sign" ng-change="checksign()" ng-disabled="isdisabled">
+                </div>
+            </div>
+            <div class="list">
+                <label class="item item-radio">
+                    <input type="radio" name="info.group" value="man" ng-click="selectm()" ng-disabled="isdisabled" ng-checked="info.man">
+                    <div class="item-content">
+                        男
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" name="info.group" value="female" ng-click="selectf()" ng-disabled="isdisabled" ng-checked="info.female">
+                    <div class="item-content">
+                        女
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <div class="list">
+                <div class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        昵称 
+                        <i ng-click="randomname()" class="ion-shuffle"></i>
+                    </span>
+                    <p style="color:red;" ng-show="errorusername">您输入的昵称过长了!</p>
+                    <input type="text" placeholder="请输入您的昵称" ng-model="info.username" ng-change="limitlen()" ng-disabled="isdisabled">
+                </div>
+            </div>
+            <div class="list">
+                <div class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        擅长<span ng-bind="info.strongShow"></span>
+                    </span>
+                    <p style="color:red;" ng-show="errorstrong"><span ng-bind="info.strongMsg"></span></p>
+                    <input type="text" placeholder="篮球 瑜伽 跆拳道" ng-model="info.strong" ng-change="checkstrong()" ng-disabled="isdisabled">
+                </div>
+            </div>
+            <div class="list">
+                <div class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        定价<span ng-bind="info.rentShow"></span>
+                    </span>
+                    <p style="color:red;" ng-show="errorrent"><span ng-bind="info.rentMsg"></span></p>
+                    <input type="text" placeholder="请输入您要出租自己的租金/每小时" ng-model="info.rent" ng-change="checkrent()" ng-disabled="isdisMyself">
+                </div>
+            </div>
+    </ion-content>
+</ion-view>

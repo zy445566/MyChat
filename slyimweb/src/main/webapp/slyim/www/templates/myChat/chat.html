@@ -1,0 +1,28 @@
+<ion-view view-title="我的聊天">
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content has-tabs="true" has-header="true" overflow-scroll="false" class="has-tabs has-header">
+        <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in myChat.chats" type="item-text-wrap" ng-click="intoChat(chat.friendId)" >
+        <img ng-src="{{chat.avatar}}">
+        <h2>{{chat.name}}</h2>
+        <p>{{chat.lastText}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <span class="badge badge-assertive" ng-show="chat.num">{{chat.num}}</span>
+        <ion-option-button class="button-balanced">
+          查看/修改资料
+        </ion-option-button>
+        <ion-option-button class="button-energized">
+          租他/她
+        </ion-option-button>
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          删除
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    </ion-content>
+</ion-view>

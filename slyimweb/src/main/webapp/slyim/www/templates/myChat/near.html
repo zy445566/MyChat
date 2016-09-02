@@ -1,0 +1,50 @@
+<ion-view view-title="附近动态">
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content has-tabs="true" has-header="true" overflow-scroll="false" class="has-tabs has-header">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>      
+        <div class="list">
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="快说说最新进展" ng-model="sendCircle.content">
+                </label>
+                <button class="button button-small" ng-click="sendCircle()">
+                    <i class="icon ion-mic-a positive"></i>
+                </button>
+            </div>
+            <div class="item item-avatar" href="#" ng-repeat="circle in myChat.dyCircle">
+                <img ng-src="{{circle.sender.avatar}}">
+                <div class="row">
+                    <div class="col col-25">
+                        <span ng-bind="circle.sender.name"></span>
+<!--
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="assertive"><span class="ion-ios-rose"></span>3</span>
+-->
+                    </div>
+                    <div class="col col-25 col-offset-50">
+                        <a class="ion-android-add-circle">加为好友</a>
+                    </div>
+                </div>
+                <div class="item-text-wrap" style="min-height:100px;">
+                    <span ng-bind="circle.content"></span>
+                </div>
+                <div class="row">
+                    <div class="col col-25 col-offset-25">
+                        <a class="button button-icon ion-thumbsup">点赞</a>
+                    </div>
+                    <div class="col col-25">
+                        <a class="button button-icon ion-eye">查看</a>
+                    </div>
+                    <div class="col col-25">
+                        <a class="button button-icon ion-edit">评论</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
